@@ -40,21 +40,23 @@ print 'NOW\n' +  str(weather['currentSummary']).capitalize() + ', '\
 print 'NEXT HOUR \n' + weather['hourSummary'].capitalize() + '\n'
 
 # Highest intensity in the next 3 hours.
-hrsDict = [ i['intensity'] for i in weather['hourPrecipitation'][1:4] ]
-if max(hrsDict) > 45:
-	nextThreeHrs = 'heavy rain'
-elif max(hrsDict) > 30:
-	nextThreeHrs = 'moderate rain'
-elif max(hrsDict) > 15:
-	nextThreeHrs = 'light rain'
-elif max(hrsDict) > 2:
-	nextThreeHrs = 'possible sprinkling'
+hrsType = [ i['type'] for i in weather['dayPrecipitation'][1:4] ]
+hrsProb = [ i['probability'] for i in weather['dayPrecipitation'][1:4] ]
+
+chance = max(hrsProb)
+probIndex = hrsProb.index(chance)
+
+if chance > 0.8:
+  nextThreeHrs = '%s' % (str(hrsType[probIndex])).capitalize()
+elif chance > 0.5:
+  nextThreeHrs = '%s likely' % (str(hrsType[probIndex])).capitalize()
+elif chance > 0.2:
+  nextThreeHrs = 'Possible %s' % str(hrsType[probIndex])
 else:
-	nextThreeHrs = 'no rain'
+  nextThreeHrs = 'No rain'
 
 print  'FOLLOWING 3 HRS\n' + nextThreeHrs.capitalize() + '\n'
 print 'NEXT 24 HRS \n' + weather['daySummary'].capitalize() + '\n'
-
 
 
  
