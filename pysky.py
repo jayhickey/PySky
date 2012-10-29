@@ -54,7 +54,7 @@ elif chance > 0.5:
 elif chance > 0.2:
   nextThreeHrs = 'Possible %s' % str(hrsType[probIndex])
 else:
-  nextThreeHrs = 'No rain'
+  nextThreeHrs = 'No precipitation'
 
 print  'FOLLOWING 3 HRS\n' + nextThreeHrs.capitalize() + '\n'
 print 'NEXT 24 HRS \n' + weather['daySummary'].capitalize() + '\n'
